@@ -209,55 +209,7 @@
     50%      { transform: translateX(-50%) translateY(6px); }
   }
 
-  /* ── COUNTDOWN ── */
-  #countdown {
-    background: linear-gradient(135deg, rgba(198,169,108,0.12) 0%, rgba(232,213,200,0.2) 100%);
-    border-top: 1px solid rgba(198,169,108,0.2);
-    border-bottom: 1px solid rgba(198,169,108,0.2);
-    text-align: center;
-    padding: 70px 20px;
-  }
-  .countdown-grid {
-    display: flex; justify-content: center;
-    gap: clamp(12px, 4vw, 44px);
-    flex-wrap: nowrap;
-    margin-top: 40px;
-  }
-  .countdown-unit {
-    display: flex; flex-direction: column; align-items: center;
-    min-width: clamp(56px, 15vw, 90px);
-  }
-  .countdown-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.8rem, 9vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1;
-    color: var(--text);
-    position: relative;
-    min-width: 2ch;
-    text-align: center;
-  }
-  .countdown-number::after {
-    content: '';
-    position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
-    width: 20px; height: 1px;
-    background: var(--gold);
-  }
-  .countdown-label {
-    font-size: clamp(0.55rem, 1.5vw, 0.62rem);
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--text-lt);
-    margin-top: 18px;
-  }
-  .countdown-sep {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: var(--blush);
-    line-height: 1;
-    align-self: center;
-    margin-top: -12px;
-  }
+  
 
   /* ── DETAILS ── */
   #details { text-align: center; }
@@ -335,6 +287,56 @@
     max-width: 380px;
     line-height: 1.8;
   }
+
+ /* ── COUNTDOWN ── */
+  #countdown {
+    background: linear-gradient(135deg, rgba(198,169,108,0.12) 0%, rgba(232,213,200,0.2) 100%);
+    border-top: 1px solid rgba(198,169,108,0.2);
+    border-bottom: 1px solid rgba(198,169,108,0.2);
+    text-align: center;
+    padding: 70px 20px;
+  }
+  .countdown-grid {
+    display: flex; justify-content: center;
+    gap: clamp(12px, 4vw, 44px);
+    flex-wrap: nowrap;
+    margin-top: 40px;
+  }
+  .countdown-unit {
+    display: flex; flex-direction: column; align-items: center;
+    min-width: clamp(56px, 15vw, 90px);
+  }
+  .countdown-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 9vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--text);
+    position: relative;
+    min-width: 2ch;
+    text-align: center;
+  }
+  .countdown-number::after {
+    content: '';
+    position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 1px;
+    background: var(--gold);
+  }
+  .countdown-label {
+    font-size: clamp(0.55rem, 1.5vw, 0.62rem);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-lt);
+    margin-top: 18px;
+  }
+  .countdown-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--blush);
+    line-height: 1;
+    align-self: center;
+    margin-top: -12px;
+  }
   /* ── FOOTER ── */
   footer {
     background: var(--text);
@@ -405,35 +407,6 @@
   <div class="scroll-hint">Scroll</div>
 </section>
 
-<!-- COUNTDOWN -->
-<section id="countdown">
-  <div class="container">
-    <span class="section-label fade-in">Until the Big Day</span>
-    <h2 class="section-title serif fade-in">Counting Down</h2>
-    <div class="divider fade-in"></div>
-    <div class="countdown-grid fade-in">
-      <div class="countdown-unit">
-        <span class="countdown-number" id="cd-days">00</span>
-        <span class="countdown-label">Days</span>
-      </div>
-      <div class="countdown-sep">·</div>
-      <div class="countdown-unit">
-        <span class="countdown-number" id="cd-hours">00</span>
-        <span class="countdown-label">Hours</span>
-      </div>
-      <div class="countdown-sep">·</div>
-      <div class="countdown-unit">
-        <span class="countdown-number" id="cd-minutes">00</span>
-        <span class="countdown-label">Minutes</span>
-      </div>
-      <div class="countdown-sep">·</div>
-      <div class="countdown-unit">
-        <span class="countdown-number" id="cd-seconds">00</span>
-        <span class="countdown-label">Seconds</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 <!-- DETAILS + MAP -->
@@ -479,6 +452,35 @@
   </div>
 </section>
 
+<!-- COUNTDOWN -->
+<section id="countdown">
+  <div class="container">
+    <span class="section-label fade-in">Until the Big Day</span>
+    <h2 class="section-title serif fade-in">Counting Down</h2>
+    <div class="divider fade-in"></div>
+    <div class="countdown-grid fade-in">
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-days">00</span>
+        <span class="countdown-label">Days</span>
+      </div>
+      <div class="countdown-sep">·</div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-hours">00</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+      <div class="countdown-sep">·</div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-minutes">00</span>
+        <span class="countdown-label">Minutes</span>
+      </div>
+      <div class="countdown-sep">·</div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-seconds">00</span>
+        <span class="countdown-label">Seconds</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
