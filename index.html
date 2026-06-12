@@ -114,24 +114,75 @@
     padding: 100px 20px 80px;
     position: relative;
     overflow: hidden;
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(232,213,200,0.45) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(198,169,108,0.18) 0%, transparent 55%),
-      var(--cream);
+    background: #2A1F17;
   }
+
+  /* Animated background particles */
+  .hero-bg {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: var(--peak, 0.6); transform: scale(1.2); }
+  }
+
+  /* Glowing orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    animation: drift var(--dur, 8s) ease-in-out infinite alternate var(--delay, 0s);
+  }
+  .orb-1 { width: 40vw; height: 40vw; background: rgba(198,169,108,0.12); top: -10%; left: -10%; }
+  .orb-2 { width: 35vw; height: 35vw; background: rgba(201,169,154,0.1); bottom: -5%; right: -5%; }
+  .orb-3 { width: 25vw; height: 25vw; background: rgba(198,169,108,0.07); top: 40%; left: 60%; }
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(3%, 4%) scale(1.05); }
+  }
+
+  /* Reveal lines */
+  .hero-reveal-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(198,169,108,0.3), transparent);
+    height: 1px;
+    width: 100%;
+    animation: scanline 6s ease-in-out infinite;
+    opacity: 0;
+  }
+  .hero-reveal-line:nth-child(1) { animation-delay: 0s; }
+  .hero-reveal-line:nth-child(2) { animation-delay: 2s; }
+  .hero-reveal-line:nth-child(3) { animation-delay: 4s; }
+  @keyframes scanline {
+    0% { top: -2%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.3; }
+    100% { top: 102%; opacity: 0; }
+  }
+
   .petal {
     position: absolute;
     border-radius: 50% 0;
-    opacity: 0.1;
     pointer-events: none;
   }
-  .petal-1 { width: min(300px,70vw); height: min(300px,70vw); background: var(--gold); top: -60px; left: -60px; transform: rotate(30deg); }
-  .petal-2 { width: min(200px,50vw); height: min(200px,50vw); background: var(--rose); bottom: 40px; right: -50px; transform: rotate(-20deg); }
-  .petal-3 { width: min(140px,35vw); height: min(140px,35vw); background: var(--blush); top: 40%; left: -40px; transform: rotate(55deg); }
+  .petal-1 { width: min(300px,70vw); height: min(300px,70vw); background: rgba(198,169,108,0.06); top: -60px; left: -60px; transform: rotate(30deg); }
+  .petal-2 { width: min(200px,50vw); height: min(200px,50vw); background: rgba(201,169,154,0.06); bottom: 40px; right: -50px; transform: rotate(-20deg); }
 
   .hero-ornament {
     display: flex; align-items: center; gap: 14px;
     margin-bottom: 18px;
+    position: relative; z-index: 2;
   }
   .ornament-line {
     width: clamp(40px, 8vw, 80px); height: 1px;
@@ -146,16 +197,26 @@
     text-transform: uppercase;
     color: var(--gold);
     font-weight: 400;
+    position: relative; z-index: 2;
   }
+
+  /* Animated name reveal */
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(3.4rem, 13vw, 8.5rem);
     font-weight: 300;
     line-height: 1.0;
-    color: var(--text);
+    color: var(--ivory);
     margin: 14px 0 6px;
+    position: relative; z-index: 2;
   }
-  .hero-title em { font-style: italic; color: var(--warm); }
+  .hero-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--gold-lt), var(--gold), var(--rose));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   .hero-ampersand {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2.4rem, 9vw, 6rem);
@@ -165,39 +226,61 @@
     display: block;
     line-height: 0.85;
     margin: 4px 0;
+    position: relative; z-index: 2;
   }
   .hero-subtitle {
     font-size: clamp(0.8rem, 2.5vw, 0.9rem);
     letter-spacing: 0.08em;
-    color: var(--text-lt);
+    color: rgba(243,237,228,0.55);
     font-weight: 300;
     max-width: 380px;
     line-height: 1.9;
     margin: 20px auto 0;
+    position: relative; z-index: 2;
   }
   .hero-date-badge {
     display: inline-flex; align-items: center; gap: 10px;
     margin-top: 30px;
     padding: 11px 24px;
-    border: 1px solid rgba(198,169,108,0.4);
+    border: 1px solid rgba(198,169,108,0.35);
     border-radius: 40px;
-    background: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.06);
     backdrop-filter: blur(8px);
     font-size: clamp(0.68rem, 2vw, 0.76rem);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--warm);
+    color: rgba(243,237,228,0.7);
     white-space: nowrap;
+    position: relative; z-index: 2;
   }
   .hero-date-badge span { color: var(--gold); }
+
+  /* Pulse ring around badge */
+  .badge-wrap {
+    position: relative; z-index: 2;
+    display: inline-block;
+  }
+  .badge-wrap::before, .badge-wrap::after {
+    content: '';
+    position: absolute; inset: -8px;
+    border-radius: 50px;
+    border: 1px solid rgba(198,169,108,0.2);
+    animation: pulse-ring 3s ease-out infinite;
+  }
+  .badge-wrap::after { animation-delay: 1.5s; }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.08); opacity: 0; }
+  }
 
   .scroll-hint {
     position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 8px;
     font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--text-lt);
+    color: rgba(243,237,228,0.35);
     animation: bob 2.2s ease-in-out infinite;
     white-space: nowrap;
+    z-index: 2;
   }
   .scroll-hint::after {
     content: '';
@@ -208,8 +291,6 @@
     0%,100% { transform: translateX(-50%) translateY(0); }
     50%      { transform: translateX(-50%) translateY(6px); }
   }
-
-  
 
   /* ── DETAILS ── */
   #details { text-align: center; }
@@ -288,7 +369,7 @@
     line-height: 1.8;
   }
 
- /* ── COUNTDOWN ── */
+  /* ── COUNTDOWN ── */
   #countdown {
     background: linear-gradient(135deg, rgba(198,169,108,0.12) 0%, rgba(232,213,200,0.2) 100%);
     border-top: 1px solid rgba(198,169,108,0.2);
@@ -337,6 +418,7 @@
     align-self: center;
     margin-top: -12px;
   }
+
   /* ── FOOTER ── */
   footer {
     background: var(--text);
@@ -376,9 +458,19 @@
 
 <!-- HERO -->
 <section id="hero">
+  <!-- Animated background -->
+  <div class="hero-bg">
+    <div class="orb orb-1" style="--dur:9s;--delay:0s;"></div>
+    <div class="orb orb-2" style="--dur:11s;--delay:1s;"></div>
+    <div class="orb orb-3" style="--dur:7s;--delay:2s;"></div>
+    <div class="hero-reveal-line"></div>
+    <div class="hero-reveal-line"></div>
+    <div class="hero-reveal-line"></div>
+    <!-- Stars injected by JS -->
+  </div>
+
   <div class="petal petal-1"></div>
   <div class="petal petal-2"></div>
-  <div class="petal petal-3"></div>
 
   <div class="hero-ornament fade-in">
     <div class="ornament-line"></div>
@@ -398,16 +490,16 @@
     Together with their families,<br>invite you to celebrate their wedding.
   </p>
 
-  <div class="hero-date-badge fade-in">
-    <span>✦</span>
-    Friday, <span>June 26, 2026</span>
-    <span>✦</span>
+  <div class="badge-wrap fade-in">
+    <div class="hero-date-badge">
+      <span>✦</span>
+      Friday, <span>26 — 6 — 2026</span>
+      <span>✦</span>
+    </div>
   </div>
 
   <div class="scroll-hint">Scroll</div>
 </section>
-
-
 
 <!-- DETAILS + MAP -->
 <section id="details">
@@ -419,12 +511,12 @@
       <div class="detail-card fade-in">
         <span class="detail-icon">📅</span>
         <p class="detail-card-label">Date</p>
-        <p class="detail-card-value serif">Friday<br>June 26, 2026</p>
+        <p class="detail-card-value serif">Friday<br>26 — 6 — 2026</p>
       </div>
       <div class="detail-card fade-in">
         <span class="detail-icon">🕗</span>
         <p class="detail-card-label">Time</p>
-        <p class="detail-card-value serif">8:00 PM<br>– 12:00 AM</p>
+        <p class="detail-card-value serif">7:30 PM<br>– 12:00 AM</p>
       </div>
       <div class="detail-card fade-in">
         <span class="detail-icon">🏛️</span>
@@ -488,13 +580,22 @@
   <p class="footer-verse fade-in">"Two souls, one heart, one love — united for eternity."</p>
   <div class="footer-line"></div>
   <p class="footer-msg">We look forward to celebrating with you</p>
-  <p class="footer-copy">June 26, 2026 &nbsp;·&nbsp; Crystal Palace Hall</p>
+  <p class="footer-copy">26 — 6 — 2026 &nbsp;·&nbsp; Crystal Palace Hall</p>
 </footer>
 
 <script>
+  /* STARS */
+  const bg = document.querySelector('.hero-bg');
+  for (let i = 0; i < 55; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${2+Math.random()*4}s;--delay:${Math.random()*4}s;--peak:${0.3+Math.random()*0.5};width:${Math.random()<0.3?3:2}px;height:${Math.random()<0.3?3:2}px;`;
+    bg.appendChild(s);
+  }
+
   /* COUNTDOWN */
   function updateCountdown() {
-    const diff = new Date('2026-06-26T20:00:00') - new Date();
+    const diff = new Date('2026-06-26T19:30:00') - new Date();
     if (diff <= 0) return;
     const d = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
@@ -518,8 +619,7 @@
   });
   document.querySelectorAll('#hero .fade-in').forEach(el => el.classList.add('visible'));
 
-
-/* NAV SHRINK */
+  /* NAV SHRINK */
   window.addEventListener('scroll', () => {
     document.querySelector('nav').style.padding = window.scrollY > 50 ? '10px 24px' : '18px 24px';
   }, { passive: true });
