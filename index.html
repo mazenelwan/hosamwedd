@@ -293,63 +293,75 @@
   }
 
   /* ── DETAILS ── */
-  #details { text-align: center; }
+  #details { text-align: center; padding: 60px 16px; }
   .details-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 44px;
-  }
-  @media (max-width: 540px) {
-    .details-grid { grid-template-columns: 1fr; gap: 14px; }
+    gap: 10px;
+    margin-top: 36px;
   }
   .detail-card {
     background: rgba(255,255,255,0.7);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(198,169,108,0.2);
-    border-radius: 18px;
-    padding: 28px 18px;
+    border-radius: 14px;
+    padding: clamp(14px, 3vw, 28px) clamp(8px, 2vw, 18px);
     transition: transform 0.3s, box-shadow 0.3s;
+    min-width: 0;
   }
   .detail-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 14px 36px rgba(122,92,72,0.1);
   }
-  .detail-icon { font-size: 1.5rem; margin-bottom: 12px; display: block; }
+  .detail-icon { font-size: clamp(1.1rem, 3vw, 1.5rem); margin-bottom: 8px; display: block; }
   .detail-card-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.28em;
+    font-size: clamp(0.48rem, 1.4vw, 0.6rem);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .detail-card-value {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-size: clamp(0.95rem, 2.8vw, 1.5rem);
     font-weight: 400;
     color: var(--text);
-    line-height: 1.35;
+    line-height: 1.3;
   }
 
   /* ── MAP ── */
   .map-wrapper {
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
     border: 1px solid rgba(198,169,108,0.25);
     box-shadow: 0 16px 50px rgba(122,92,72,0.1);
-    height: clamp(240px, 45vw, 380px);
-    margin-top: 36px;
+    height: clamp(220px, 55vw, 380px);
+    margin-top: 28px;
+    position: relative;
   }
   .map-wrapper iframe { width: 100%; height: 100%; border: none; display: block; }
+  .map-wrapper .map-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(42,31,23,0.55);
+    transition: opacity 0.3s;
+  }
+  .map-wrapper .map-overlay.hidden { opacity: 0; pointer-events: none; }
+  .map-wrapper .map-overlay span {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ivory); border: 1px solid rgba(198,169,108,0.5);
+    padding: 10px 20px; border-radius: 30px; cursor: pointer;
+    background: rgba(198,169,108,0.15);
+  }
   .map-btn {
     display: inline-flex; align-items: center; gap: 9px;
-    margin-top: 24px;
+    margin-top: 20px;
     padding: 13px 28px;
     background: var(--gold);
     color: var(--white);
     text-decoration: none;
     border-radius: 40px;
-    font-size: 0.72rem;
+    font-size: clamp(0.62rem, 2vw, 0.72rem);
     letter-spacing: 0.18em;
     text-transform: uppercase;
     font-weight: 500;
@@ -375,21 +387,21 @@
     border-top: 1px solid rgba(198,169,108,0.2);
     border-bottom: 1px solid rgba(198,169,108,0.2);
     text-align: center;
-    padding: 70px 20px;
+    padding: clamp(44px, 8vw, 70px) 16px;
   }
   .countdown-grid {
     display: flex; justify-content: center;
-    gap: clamp(12px, 4vw, 44px);
+    gap: clamp(8px, 3vw, 44px);
     flex-wrap: nowrap;
-    margin-top: 40px;
+    margin-top: 36px;
   }
   .countdown-unit {
     display: flex; flex-direction: column; align-items: center;
-    min-width: clamp(56px, 15vw, 90px);
+    min-width: clamp(48px, 12vw, 90px);
   }
   .countdown-number {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.8rem, 9vw, 5.5rem);
+    font-size: clamp(2.2rem, 8vw, 5.5rem);
     font-weight: 300;
     line-height: 1;
     color: var(--text);
